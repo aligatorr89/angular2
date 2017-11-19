@@ -9,11 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var http_service_1 = require("../services/http.service");
 var blacklist_1 = require("../interfaces/blacklist");
 var HomeComponent = (function () {
-    function HomeComponent(http) {
+    function HomeComponent(http, router) {
         this.http = http;
+        this.router = router;
         this.blacklistData = [];
         this.row = new blacklist_1.C_blacklist();
         this.currentList = '';
@@ -46,6 +48,12 @@ var HomeComponent = (function () {
             _this.currentList = route;
         });
     };
+    HomeComponent.prototype.logout = function () {
+        var _this = this;
+        this.http.logout().subscribe(function (res) {
+            _this.router.navigate(['']);
+        });
+    };
     return HomeComponent;
 }());
 HomeComponent = __decorate([
@@ -55,7 +63,7 @@ HomeComponent = __decorate([
         templateUrl: './home.component.html',
         providers: [http_service_1.HttpService]
     }),
-    __metadata("design:paramtypes", [http_service_1.HttpService])
+    __metadata("design:paramtypes", [http_service_1.HttpService, router_1.Router])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

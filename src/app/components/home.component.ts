@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import {Router} from '@angular/router';
 import { HttpService } from '../services/http.service';
 
 import { I_blacklist, C_blacklist } from '../interfaces/blacklist';
@@ -18,7 +18,7 @@ export class HomeComponent {
 	currentList: string = '';
 	newRow = {} as I_blacklist;
 	
-	constructor(private http: HttpService) {
+	constructor(private http: HttpService, private router: Router) {
 		this.rowKeys = Object.keys(this.row);
 	}
 	
@@ -46,6 +46,12 @@ export class HomeComponent {
 			this.blacklistData = res.data;
 			this.currentList = route;
 		})
+	}
+	
+	logout() {
+		this.http.logout().subscribe(res => {
+			this.router.navigate(['']);
+		});
 	}
 	
 }

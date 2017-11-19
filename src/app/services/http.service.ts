@@ -56,6 +56,11 @@ export class HttpService {
 			.map(res => res.statusText);
 	}
 	
+	logout() {
+		return this.http.post(this.url + 'logout', '', this.options)
+			.map(res => res.statusText);
+	}
+	
 	postRegister(data: I_register) {
 		let params = new URLSearchParams();
 		for(let key in data) params.set(key, data[key]);

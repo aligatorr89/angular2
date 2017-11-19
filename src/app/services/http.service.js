@@ -52,6 +52,10 @@ var HttpService = (function () {
         return this.http.post(this.url + 'login', params.toString(), this.options)
             .map(function (res) { return res.statusText; });
     };
+    HttpService.prototype.logout = function () {
+        return this.http.post(this.url + 'logout', '', this.options)
+            .map(function (res) { return res.statusText; });
+    };
     HttpService.prototype.postRegister = function (data) {
         var params = new http_1.URLSearchParams();
         for (var key in data)
