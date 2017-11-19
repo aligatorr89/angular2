@@ -12,7 +12,6 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
 var HttpService = (function () {
-    //routeName: string;
     function HttpService(http) {
         this.http = http;
         this.url = 'http://localhost:3001/';
@@ -33,10 +32,6 @@ var HttpService = (function () {
             params.set(key, data[key]);
         return this.http.post(this.url + 'register', params.toString(), options)
             .map(function (res) { return res.statusText; });
-    };
-    HttpService.prototype.test = function () {
-        return this.http.get('http://localhost:3001/test')
-            .map(function (res) { return res.json(); });
     };
     return HttpService;
 }());

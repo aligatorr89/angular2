@@ -2,20 +2,19 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import {Ilogin} from '../interfaces/login';
-import {Iregister} from '../interfaces/register';
+import {I_login} from '../interfaces/login';
+import {I_register} from '../interfaces/register';
 
 @Injectable()
 export class HttpService {
-	//routeName: string;
-	
+
 	constructor(private http: Http) {
 		console.log("HttpService on...");
 	}
 	
 	url = 'http://localhost:3001/';
 	
-	postLogin(data: Ilogin) {
+	postLogin(data: I_login) {
 		
 		let params = new URLSearchParams();
 		let options = new RequestOptions({ 'headers': new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
@@ -26,7 +25,7 @@ export class HttpService {
 			.map(res => res.statusText);
 	}
 	
-	postRegister(data: Iregister) {
+	postRegister(data: I_register) {
 
 		let params = new URLSearchParams();
 		let options = new RequestOptions({ 'headers': new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
@@ -37,9 +36,5 @@ export class HttpService {
 			.map(res => res.statusText);
 	}
 	
-	test() {
-		return this.http.get('http://localhost:3001/test')
-			.map(res => res.json());
-	}
 }
 
