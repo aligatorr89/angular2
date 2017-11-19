@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpService } from './services/http.service';
 
+import {Ilogin} from './interfaces/login';
+import {Iregister} from './interfaces/register';
+
 @Component({
   selector: 'my-app',
   template: `
@@ -43,8 +46,8 @@ import { HttpService } from './services/http.service';
 })
 export class AppComponent {
 
-	loginData: loginData;
-	registerData: registerData;
+	loginData: Ilogin;
+	registerData: Iregister;
 	
 	constructor(private httpService: HttpService) {
 	
@@ -59,10 +62,6 @@ export class AppComponent {
 			password: ''
 		}
 	}
-	
-	/*ngOnInit() {
-		this.loginData = this.httpService.getLoginModel();
-	}*/
 	
 	login() {
 		this.httpService.postLogin(this.loginData).subscribe(statusText => {
@@ -84,14 +83,3 @@ export class AppComponent {
 	}
 }
 
-interface loginData {
-	email: string;
-	password: string;
-}
-
-interface registerData {
-	name: string;
-	lastname:string;
-	email: string;
-	password: string;
-}

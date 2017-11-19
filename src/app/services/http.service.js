@@ -45,9 +45,4 @@ HttpService = __decorate([
     __metadata("design:paramtypes", [http_1.Http])
 ], HttpService);
 exports.HttpService = HttpService;
-/*@Injectable()
-export abstract class dataModelService {
-  getLoginModel: () => loginData;
-    getRegisterModel: () => registerData;
-}*/
 //# sourceMappingURL=http.service.js.map

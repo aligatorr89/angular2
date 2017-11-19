@@ -24,9 +24,6 @@ var AppComponent = (function () {
             password: ''
         };
     }
-    /*ngOnInit() {
-        this.loginData = this.httpService.getLoginModel();
-    }*/
     AppComponent.prototype.login = function () {
         this.httpService.postLogin(this.loginData).subscribe(function (statusText) {
             if (statusText === 'OK')
