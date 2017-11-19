@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
+import { CookieService } from 'angular2-cookie/core';
 
 import { HttpService } from '../services/http.service';
 
@@ -11,18 +12,19 @@ import {I_register} from '../interfaces/register';
 	moduleId: module.id,
   selector: 'index',
   templateUrl: './index.component.html',
-	providers: [HttpService]
+	providers: [HttpService, CookieService ]
 })
 export class IndexComponent {
 	
 	loginData = {} as I_login;
 	registerData = {} as I_register;
 	
-	constructor(private httpService: HttpService, private router: Router) {}
+	constructor(private httpService: HttpService, private router: Router, private cookie: CookieService) {}
 	
 	login() {
 		this.httpService.postLogin(this.loginData).subscribe(statusText => {
 			if(statusText === 'OK') this.router.navigate(['home']);
+			this.cookie.put("backend_test_url", "some_random_value");
 		});
 	}
 	

@@ -1,28 +1,45 @@
 <h2>Blacklist calls</h2>
 <ul>
-    <li>
-        <a class="link" href="getall">GET api/getall</a>
-    </li>
-    <li>
-        <a class="link" href="getactive">GET api/getactive</a>
-    </li>
-    <li>
-        <a class="link" href="getinactive">GET api/getinactive</a>
-    </li>
-    <li>
-        <a class="link" href="insert">POST api/insert</a>
-        <p class="description">Post fields:<br>email, active (1 or 0)</p>
-				
-				<!--<button (click)="insert()"></button>-->
-    </li>
-    <li>
-        <a class="link" href="edit">POST api/edit</a>
-        <p class="description">Post fields:<br>email, active (1 or 0), id</p>
-				
-				<!--<button (click)="edit()"></button>-->
-    </li>
-    <li>
-        <a class="link" href="delete">POST api/delete</a>
-        <p class="description">Post fields:<br>id</p>
-    </li>
+	<li><button (click)="get('getall')">getall</button></li>
+	
+	<li><button (click)="get('getactive')">getactive</button></li>
+	
+	<li><button (click)="get('getinactive')">getinactive</button></li>
+	
+	<li>
+		<a class="link" href="insert">POST api/insert</a>
+		<p class="description">Post fields:<br>email, active (1 or 0)</p>
+		
+		<table>
+			<tr>
+				<td *ngFor="let prop of rowKeys">{{prop}}:&nbsp;
+					<div [ngSwitch]="prop">
+						<div *ngSwitchCase="'id'">&nbsp;</div>
+						<div *ngSwitchCase="'created'">&nbsp;</div>
+						<div *ngSwitchDefault><input [(ngModel)]="newRow[prop]"/></div>
+					</div>
+				</td>
+				<td><button (click)="insert()">INSERT</button></td>
+			</tr>
+		</table>
+	</li>
 </ul>
+
+<h2>{{ currentList }}</h2>
+
+<table *ngIf="blacklistData.length > 0">
+	<tr>
+		<td class="border-1" *ngFor="let prop of rowKeys">{{ prop }}</td>
+	</tr>
+	<tr *ngFor="let row of blacklistData;let i = index">
+		<td class="border-1" *ngFor="let prop of rowKeys">
+			<div [ngSwitch]="prop">
+				<div *ngSwitchCase="'id'">{{ row[prop] }}</div>
+				<div *ngSwitchCase="'created'">{{ row[prop] }}</div>
+				<div *ngSwitchDefault><input [(ngModel)]="row[prop]" /></div>
+			</div>
+		</td>
+		<td><button (click)="edit(i)">EDIT</button></td>
+		<td><button (click)="delete(i)">DELETE</button></td>
+	</tr>
+</table>

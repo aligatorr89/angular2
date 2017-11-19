@@ -10,11 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var core_2 = require("angular2-cookie/core");
 var http_service_1 = require("../services/http.service");
 var IndexComponent = (function () {
-    function IndexComponent(httpService, router) {
+    function IndexComponent(httpService, router, cookie) {
         this.httpService = httpService;
         this.router = router;
+        this.cookie = cookie;
         this.loginData = {};
         this.registerData = {};
     }
@@ -23,6 +25,7 @@ var IndexComponent = (function () {
         this.httpService.postLogin(this.loginData).subscribe(function (statusText) {
             if (statusText === 'OK')
                 _this.router.navigate(['home']);
+            _this.cookie.put("backend_test_url", "some_random_value");
         });
     };
     IndexComponent.prototype.register = function () {
@@ -38,9 +41,9 @@ IndexComponent = __decorate([
         moduleId: module.id,
         selector: 'index',
         templateUrl: './index.component.html',
-        providers: [http_service_1.HttpService]
+        providers: [http_service_1.HttpService, core_2.CookieService]
     }),
-    __metadata("design:paramtypes", [http_service_1.HttpService, router_1.Router])
+    __metadata("design:paramtypes", [http_service_1.HttpService, router_1.Router, core_2.CookieService])
 ], IndexComponent);
 exports.IndexComponent = IndexComponent;
 //# sourceMappingURL=index.component.js.map
